@@ -476,6 +476,7 @@ function renderPaginationItem(list, uri, text, markerCss)
             .on("click" + namespace, getCssSelector(css.paginationButton), function (e)
             {
                 e.stopPropagation();
+                e.preventDefault();
 
                 var $this = $(this),
                     parent = $this.parent();
