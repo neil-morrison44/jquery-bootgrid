@@ -1,6 +1,6 @@
 /*! 
- * jQuery Bootgrid v1.1.4 - 12/15/2014
- * Copyright (c) 2014 Rafael Staib (http://www.jquery-bootgrid.com)
+ * jQuery Bootgrid v1.1.4 - 02/26/2015
+ * Copyright (c) 2015 Rafael Staib (http://www.jquery-bootgrid.com)
  * Licensed under MIT http://www.opensource.org/licenses/MIT
  */
 ;(function ($, window, undefined)
@@ -1126,11 +1126,11 @@ Grid.defaults = {
         dropDownMenuText: "dropdown-text", // must be a unique class name or constellation of class names within the actionDropDown
         footer: "bootgrid-footer container-fluid",
         header: "bootgrid-header container-fluid",
-        icon: "icon glyphicon",
-        iconColumns: "glyphicon-th-list",
-        iconDown: "glyphicon-chevron-down",
-        iconRefresh: "glyphicon-refresh",
-        iconUp: "glyphicon-chevron-up",
+        icon: "icon fa",
+        iconColumns: "fa-list",
+        iconDown: "fa-sort-desc",
+        iconRefresh: "fa-refresh",
+        iconUp: "fa-sort-asc",
         infos: "infos", // must be a unique class name or constellation of class names within the header and footer,
         left: "text-left",
         pagination: "pagination", // must be a unique class name or constellation of class names within the header and footer
@@ -1220,7 +1220,7 @@ Grid.defaults = {
         paginationItem: "<li class=\"{{ctx.css}}\"><a href=\"{{ctx.uri}}\" class=\"{{css.paginationButton}}\">{{ctx.text}}</a></li>",
         rawHeaderCell: "<th class=\"{{ctx.css}}\">{{ctx.content}}</th>", // Used for the multi select box
         row: "<tr{{ctx.attr}}>{{ctx.cells}}</tr>",
-        search: "<div class=\"{{css.search}}\"><div class=\"input-group\"><span class=\"{{css.icon}} input-group-addon glyphicon-search\"></span> <input type=\"text\" class=\"{{css.searchField}}\" placeholder=\"{{lbl.search}}\" /></div></div>",
+        search: "<div class=\"{{css.search}}\"><div class=\"input-group\"><span class=\"{{css.icon}} input-group-addon fa  fa-search\"></span> <input type=\"text\" class=\"{{css.searchField}}\" placeholder=\"{{lbl.search}}\" /></div></div>",
         select: "<input name=\"select\" type=\"{{ctx.type}}\" class=\"{{css.selectBox}}\" value=\"{{ctx.value}}\" {{ctx.checked}} />"
     }
 };
