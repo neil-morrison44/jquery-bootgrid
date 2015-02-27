@@ -551,25 +551,24 @@ Grid.prototype.deselect = function(rowIds)
         rowIds = rowIds || this.currentRows.propValues(this.identifier);
 
         var id, i, pos,
-            deselectedRows = [];
+            deselectedRows = [],
+            identifier = this.identifier,
+            currentRows = this.currentRows;
 
-        while (rowIds.length > 0)
-        {
-            id = rowIds.pop();
-            pos = $.inArray(id, this.selectedRows);
-            if (pos !== -1)
-            {
-                for (i = 0; i < this.currentRows.length; i++)
+        this.selectedRows = this.selectedRows.filter(function(row){
+            var deselected = (rowIds.indexOf(row) !== -1);
+            if(deselected){
+                for (i = 0; i < currentRows.length; i++)
                 {
-                    if (this.currentRows[i][this.identifier] === id)
+                    if (currentRows[i][identifier] === row)
                     {
-                        deselectedRows.push(this.currentRows[i]);
-                        this.selectedRows.splice(pos, 1);
-                        break;
+                        deselectedRows.push(currentRows[i]);
                     }
                 }
+
             }
-        }
+            return !deselected;
+        });
 
         if (deselectedRows.length > 0)
         {
