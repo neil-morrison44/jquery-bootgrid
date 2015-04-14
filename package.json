@@ -2,21 +2,24 @@
     "name": "jquery-bootgrid",
     "namespace": "jquery.bootgrid",
     "title": "jQuery Bootgrid",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "description": "Nice, sleek and intuitive. A grid control especially designed for bootstrap.",
-    "homepage": "http://www.jquery-bootgrid.com",
-    "author": {
+    "authors": [{
         "name": "Rafael Staib",
         "email": "me@rafaelstaib.com",
         "url": "http://www.rafaelstaib.com"
     },
-    "bugs": "https://github.com/rstaib/jquery-bootgrid/issues",
+    {
+        "name": "Neil Morrison",
+        "email": "email@neil.today",
+        "url": "http://neil.today"
+    }],
     "scripts": {
         "test": "grunt"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/rstaib/jquery-bootgrid.git"
+        "url": "https://github.com/neil-morrison44/jquery-bootgrid.git"
     },
     "keywords": [
         "jquery-plugin",
