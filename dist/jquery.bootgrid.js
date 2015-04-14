@@ -1,6 +1,6 @@
 /*! 
- * jQuery Bootgrid v1.1.4 - 02/27/2015
- * Copyright (c) 2015 Rafael Staib (http://www.jquery-bootgrid.com)
+ * jQuery Bootgrid v1.1.6 - 04/14/2015
+ * Copyright (c) 2015 Rafael Staib 
  * Licensed under MIT http://www.opensource.org/licenses/MIT
  */
 ;(function ($, window, undefined)
@@ -660,8 +660,6 @@ function registerRowEvents(tbody)
     tbody.off("click" + namespace, "> tr")
         .on("click" + namespace, "> tr", function(e)
         {
-            e.stopPropagation();
-
             var $this = $(this),
                 id = (that.identifier == null) ? $this.data("row-id") : 
                     that.converter.from($this.data("row-id") + ""),

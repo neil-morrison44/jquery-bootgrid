@@ -650,8 +650,6 @@ function registerRowEvents(tbody)
     tbody.off("click" + namespace, "> tr")
         .on("click" + namespace, "> tr", function(e)
         {
-            e.stopPropagation();
-
             var $this = $(this),
                 id = (that.identifier == null) ? $this.data("row-id") : 
                     that.converter.from($this.data("row-id") + ""),
