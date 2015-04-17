@@ -713,6 +713,22 @@ function renderSearchField()
     }
 }
 
+var stringWidth = function(string, font) {
+  var f = font || '12px arial',
+      o = $('<div>' + string + '</div>')
+            .css({'position': 'absolute', 'float': 'left', 'white-space': 'nowrap', 'visibility': 'hidden', 'font': f})
+            .appendTo($('body')),
+      w = o.width();
+
+  o.remove();
+
+  return w;
+};
+
+var stringSplice = function(string, idx, rem, s ) {
+    return (string.slice(0,idx) + s + string.slice(idx + Math.abs(rem)));
+};
+
 function renderTableHeader()
 {
     var that = this,
@@ -720,6 +736,7 @@ function renderTableHeader()
         css = this.options.css,
         tpl = this.options.templates,
         html = "",
+        rows = this.rows,
         sorting = this.options.sorting;
 
     if (this.selection)
@@ -740,10 +757,27 @@ function renderTableHeader()
                 icon = tpl.icon.resolve(getParams.call(that, { iconCss: iconCss })),
                 align = column.headerAlign,
                 cssClass = (column.headerCssClass.length > 0) ? " " + column.headerCssClass : "";
-            html += tpl.headerCell.resolve(getParams.call(that, {
+            var headerHTML = tpl.headerCell.resolve(getParams.call(that, {
                 column: column, icon: icon, sortable: sorting && column.sortable && css.sortable || "",
                 css: ((align === "right") ? css.right : (align === "center") ? 
                     css.center : css.left) + cssClass }));
+
+            // get the width of the widest string in the column (including header)
+            var text = $.map(rows, function(row, index){
+                return row[column.id];
+            });
+            text.push(column.id);
+            text = $.unique(text);
+
+            var maxWidth = Math.max.apply({}, $.map(text, function(t){
+                return stringWidth(""+t, "'Helvetica Neue', Helvetica, Arial, sans-serif 14px bold");
+            }));
+
+            if (maxWidth < 150){
+                headerHTML = stringSplice(headerHTML, 3, 0, " style=\"width:"+(maxWidth + 34)+"px;\"");
+            }
+
+            html += headerHTML;
         }
     });
 
