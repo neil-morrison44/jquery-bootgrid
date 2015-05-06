@@ -795,8 +795,8 @@ function renderTableHeader()
     if (this.options.floatingHeader)
     {
         headerRow.css("opacity", 0.1);
-        this.floatingHeader.find("thead > tr").html(html);
-        headerRow = this.floatingHeader.find("thead > tr")
+        headerRow = this.floatingHeader.find("thead > tr");
+        headerRow.html(html);
     }
 
     // todo: create a own function for that piece of code

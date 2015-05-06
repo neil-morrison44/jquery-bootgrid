@@ -1,5 +1,5 @@
 /*! 
- * jQuery Bootgrid v1.2.0 - 04/17/2015
+ * jQuery Bootgrid v1.3.0 - 05/06/2015
  * Copyright (c) 2015 Rafael Staib 
  * Licensed under MIT http://www.opensource.org/licenses/MIT
  */
@@ -805,8 +805,8 @@ function renderTableHeader()
     if (this.options.floatingHeader)
     {
         headerRow.css("opacity", 0.1);
-        this.floatingHeader.find("thead > tr").html(html);
-        headerRow = this.floatingHeader.find("thead > tr")
+        headerRow = this.floatingHeader.find("thead > tr");
+        headerRow.html(html);
     }
 
     // todo: create a own function for that piece of code
