@@ -303,6 +303,15 @@ function prepareTable()
         this.footer = $(tpl.footer.resolve(getParams.call(this, { id: this.element._bgId() + "-footer" })));
         wrapper.after(this.footer);
     }
+
+    if (this.options.floatingHeader)
+    {
+        this.floatingHeader = $("<table><thead><tr></tr></thead></table>").addClass("table table-condensed floating-header-table table-hover table-striped bootgrid-table");
+        wrapper.before(this.floatingHeader);
+
+        var $scrollDiv = $("<div>").addClass("scroll-table-div");
+        wrapper.wrap($scrollDiv);
+    }
 }
 
 function renderActions()
@@ -792,6 +801,13 @@ function renderTableHeader()
     });
 
     headerRow.html(html);
+
+    if (this.options.floatingHeader)
+    {
+        headerRow.css("opacity", 0.1);
+        this.floatingHeader.find("thead > tr").html(html);
+        headerRow = this.floatingHeader.find("thead > tr")
+    }
 
     // todo: create a own function for that piece of code
     if (sorting)

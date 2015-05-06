@@ -142,3 +142,17 @@
   text-overflow: inherit !important;
   white-space: inherit !important;
 }
+.floating-header-table{
+    position: absolute;
+  /* height: 0px; */
+    top: 64px;
+    z-index: 100;
+}
+.floating-header-table tr{
+    background: white;
+}
+
+.scroll-table-div{
+  max-height: 350px;
+  overflow: auto;
+}
