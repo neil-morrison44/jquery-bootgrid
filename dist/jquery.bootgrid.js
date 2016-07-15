@@ -1,5 +1,5 @@
 /*! 
- * jQuery Bootgrid v1.3.1 - 07/15/2016
+ * jQuery Bootgrid v1.3.2 - 07/15/2016
  * Copyright (c) 2016 Rafael Staib 
  * Licensed under MIT http://www.opensource.org/licenses/MIT
  */
@@ -154,14 +154,7 @@ response = {
 
 function loadData()
 {
-    var that = this,
-        request = getRequest.call(this),
-        url = getUrl.call(this);
-
-    if (this.options.ajax && (url == null || typeof url !== "string" || url.length === 0))
-    {
-        throw new Error("Url setting must be a none empty string or a function that returns one.");
-    }
+    var that = this;
 
     this.element._bgBusyAria(true).trigger("load" + namespace);
     showLoading.call(this);
@@ -204,35 +197,51 @@ function loadData()
 
     if (this.options.ajax)
     {
-        // aborts the previous ajax request if not already finished or failed
-        if (that.xqr)
+        var request = getRequest.call(this),
+            url = getUrl.call(this);
+
+        if (url == null || typeof url !== "string" || url.length === 0)
         {
-            that.xqr.abort();
+            throw new Error("Url setting must be a none empty string or a function that returns one.");
         }
 
-        that.xqr = $.post(url, request, function (response)
+        // aborts the previous ajax request if not already finished or failed
+        if (this.xqr)
         {
-            that.xqr = null;
+            this.xqr.abort();
+        }
 
-            if (typeof (response) === "string")
+        var settings = {
+            url: url,
+            data: request,
+            success: function(response)
             {
-                response = $.parseJSON(response);
-            }
+                that.xqr = null;
 
-            response = that.options.responseHandler(response);
+                if (typeof (response) === "string")
+                {
+                    response = $.parseJSON(response);
+                }
 
-            that.current = response.current;
-            update(response.rows, response.total);
-        }).fail(function (jqXHR, textStatus, errorThrown)
-        {
-            that.xqr = null;
+                response = that.options.responseHandler(response);
 
-            if (textStatus !== "abort")
+                that.current = response.current;
+                update(response.rows, response.total);
+            },
+            error: function (jqXHR, textStatus, errorThrown)
             {
-                renderNoResultsRow.call(that); // overrides loading mask
-                that.element._bgBusyAria(false).trigger("loaded" + namespace);
+                that.xqr = null;
+
+                if (textStatus !== "abort")
+                {
+                    renderNoResultsRow.call(that); // overrides loading mask
+                    that.element._bgBusyAria(false).trigger("loaded" + namespace);
+                }
             }
-        });
+        };
+        settings = $.extend(this.options.ajaxSettings, settings);
+
+        this.xqr = $.ajax(settings);
     }
     else
     {
